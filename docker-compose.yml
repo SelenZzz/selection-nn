@@ -1,0 +1,8 @@
+version: "3.8"
+services:
+  tensorflow:
+    build: ./src
+    volumes:
+      - ./src/:/app
+    stdin_open: true
+    tty: true
