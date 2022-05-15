@@ -17,12 +17,12 @@ def classify(classes, model, value):
 model_weak = nn.weak_model()
 model_sum = nn.summary_model()
 
-classes = ["Критично", "Некритично"]
+classes = [style.BOLD + "- Критично" + style.END, ""]
 df = pd.read_csv("table.csv", index_col=0)
 columns = [i.lstrip() for i in df.columns if isinstance(df[i].iloc[1], np.int64)]
 means = [mean(df[i].tolist()) for i in columns]
 print(style.BOLD + "Найдены метрики (avg):" + style.END)
-[print(f"\t{columns[i]}: {means[i]} - {classify(classes,model_weak,[means[i]])}") for i in range(0, len(columns))]
+[print(f"\t{columns[i]}: {means[i]} {classify(classes,model_weak,[means[i]])}") for i in range(0, len(columns))]
 
 classes = ["Низко", "Средне", "Хорошо", "Отлично"]
 mean_summary = mean(means)
